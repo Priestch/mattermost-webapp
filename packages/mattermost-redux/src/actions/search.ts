@@ -197,7 +197,7 @@ export function getMoreFilesForSearch(): ActionFunc {
     };
 }
 
-export function getFlaggedPosts(): ActionFunc {
+export function getFlaggedPosts(page = 0): ActionFunc {
     return async (dispatch: DispatchFunc, getState: GetStateFunc) => {
         const state = getState();
         const userId = getCurrentUserId(state);
@@ -207,7 +207,7 @@ export function getFlaggedPosts(): ActionFunc {
 
         let posts;
         try {
-            posts = await Client4.getFlaggedPosts(userId, '', teamId);
+            posts = await Client4.getFlaggedPosts(userId, '', teamId, page);
 
             await Promise.all([getProfilesAndStatusesForPosts(posts.posts, dispatch, getState) as any, dispatch(getMissingChannelsFromPosts(posts.posts)) as any]);
         } catch (error) {

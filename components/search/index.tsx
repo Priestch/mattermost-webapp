@@ -20,6 +20,7 @@ import {
     openRHSSearch,
     filterFilesSearchByExt,
     updateSearchType,
+    showFlaggedPostsWithPaginationSupport,
 } from 'actions/views/rhs';
 import {autocompleteChannelsForSearch} from 'actions/channel_actions';
 import {autocompleteUsersInTeam} from 'actions/user_actions';
@@ -61,6 +62,7 @@ function mapDispatchToProps(dispatch: Dispatch<AnyAction>) {
             showChannelFiles,
             showMentions,
             showFlaggedPosts,
+            showFlaggedPostsWithPaginationSupport,
             setRhsExpanded,
             closeRightHandSide,
             autocompleteChannelsForSearch,

@@ -1,0 +1,9 @@
+.SearchResultsFooter {
+    display: flex;
+    flex: 0 0 56px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid rgba(var(--center-channel-color-rgb), 0.12);
+    border-left: 1px solid rgba(var(--center-channel-color-rgb), 0.12);
+}

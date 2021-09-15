@@ -245,6 +245,45 @@ export function showFlaggedPosts() {
     };
 }
 
+export function showFlaggedPostsWithPaginationSupport(page: number, syncState = false) {
+    return async (dispatch: DispatchFunc, getState: GetStateFunc) => {
+        const state = getState();
+        const teamId = getCurrentTeamId(state);
+
+        if (syncState) {
+            dispatch({
+                type: ActionTypes.UPDATE_RHS_STATE,
+                state: RHSStates.FLAG,
+            });
+        }
+
+        const results = await dispatch(getFlaggedPosts(page));
+        let data: any;
+        if ('data' in results) {
+            data = results.data;
+        }
+
+        if (syncState) {
+            dispatch(batchActions([
+                {
+                    type: SearchTypes.RECEIVED_SEARCH_POSTS,
+                    data,
+                },
+                {
+                    type: SearchTypes.RECEIVED_SEARCH_TERM,
+                    data: {
+                        teamId,
+                        terms: null,
+                        isOrSearch: false,
+                    },
+                },
+            ]));
+        }
+
+        return {data};
+    };
+}
+
 export function showPinnedPosts(channelId?: string) {
     return async (dispatch: DispatchFunc, getState: GetStateFunc) => {
         const state = getState();

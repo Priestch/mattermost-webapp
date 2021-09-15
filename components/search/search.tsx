@@ -20,6 +20,7 @@ import UserGuideDropdown from 'components/rhs_search_nav/components/user_guide_d
 
 import SearchBar from 'components/search_bar/search_bar';
 import SearchResults from 'components/search_results';
+import SearchResultsFooter from 'components/search_results/search_results_footer';
 import Provider from 'components/suggestion/provider';
 import SearchDateProvider from 'components/suggestion/search_date_provider';
 import SearchChannelProvider from 'components/suggestion/search_channel_provider';
@@ -502,24 +503,33 @@ const Search: React.FC<Props> = (props: Props): JSX.Element => {
                 </div>
             </div>
             {props.searchVisible ? (
-                <SearchResults
-                    isMentionSearch={props.isMentionSearch}
-                    isFlaggedPosts={props.isFlaggedPosts}
-                    isPinnedPosts={props.isPinnedPosts}
-                    isChannelFiles={props.isChannelFiles}
-                    shrink={handleShrink}
-                    channelDisplayName={props.channelDisplayName}
-                    isOpened={props.isSideBarRightOpen}
-                    updateSearchTerms={handleAddSearchTerm}
-                    handleSearchHintSelection={handleSearchHintSelection}
-                    isSideBarExpanded={props.isRhsExpanded}
-                    getMorePostsForSearch={props.actions.getMorePostsForSearch}
-                    getMoreFilesForSearch={props.actions.getMoreFilesForSearch}
-                    setSearchFilterType={handleSetSearchFilter}
-                    searchFilterType={searchFilterType}
-                    setSearchType={(value: SearchType) => actions.updateSearchType(value)}
-                    searchType={searchType || 'messages'}
-                />
+                <>
+                    <SearchResults
+                        isMentionSearch={props.isMentionSearch}
+                        isFlaggedPosts={props.isFlaggedPosts}
+                        isPinnedPosts={props.isPinnedPosts}
+                        isChannelFiles={props.isChannelFiles}
+                        shrink={handleShrink}
+                        channelDisplayName={props.channelDisplayName}
+                        isOpened={props.isSideBarRightOpen}
+                        updateSearchTerms={handleAddSearchTerm}
+                        handleSearchHintSelection={handleSearchHintSelection}
+                        isSideBarExpanded={props.isRhsExpanded}
+                        getMorePostsForSearch={props.actions.getMorePostsForSearch}
+                        getMoreFilesForSearch={props.actions.getMoreFilesForSearch}
+                        setSearchFilterType={handleSetSearchFilter}
+                        searchFilterType={searchFilterType}
+                        setSearchType={(value: SearchType) => actions.updateSearchType(value)}
+                        searchType={searchType || 'messages'}
+                    />
+                    {props.isFlaggedPosts &&
+                    <SearchResultsFooter
+                        actions={{
+                            // eslint-disable-next-line react/prop-types
+                            showFlaggedPostsWithPaginationSupport: props.actions.showFlaggedPostsWithPaginationSupport,
+                        }}
+                    />}
+                </>
             ) : props.children}
         </div>
     );

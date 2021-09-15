@@ -2,7 +2,7 @@
 // See LICENSE.txt for license information.
 /* eslint-disable react/no-string-refs */
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
 import {MessageDescriptor, useIntl, FormattedMessage} from 'react-intl';
 import {useSelector} from 'react-redux';
 import Scrollbars from 'react-custom-scrollbars';
